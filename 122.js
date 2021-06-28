@@ -33,26 +33,25 @@ Constraints:
  * @param {number[]} prices
  * @return {number}
  */
- var maxProfit = function(prices) {
-    
-    let output = 0;
-    let min = prices[0];
-    let min_tag = 0;
-    for(let i = 0; i<prices.length; i++) {
-        if(min>prices[i]){
-            min = prices[i];
-            min_tag = i;
+var maxProfit = function (prices) {
+  let output = 0;
+  let i = 0;
+  while(i<prices.length-1) {
+      if(prices[i] >= prices[i+1]) {
+          i++;
+      } else {
+        let pre = i + 1;
+        if(prices[pre]<=prices[pre+1]){
+            pre++;
+        } else {
+            output += prices[pre] - prices[i];
+            i = pre + 1;
+            console.log(output,'output');
+            console.log(i,'i');
         }
-    }
-    console.log(min_tag);
-    let pre = prices[min_tag];
-    for(let i = min_tag+1; i<prices.length;i++) {
-        if(prices[i] > pre) {
-            output += prices[i] - pre;
-            pre = prices[i];
-        }
-    }
-    return output;
+      }
+  }
+  return output;
 };
 
-console.log(maxProfit([7,1,5,3,6,4]));
+console.log(maxProfit([7, 1, 5, 3, 6, 4]));
