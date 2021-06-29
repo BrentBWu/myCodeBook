@@ -36,22 +36,23 @@ Constraints:
 var maxProfit = function (prices) {
   let output = 0;
   let i = 0;
-  while(i<prices.length-1) {
-      if(prices[i] >= prices[i+1]) {
-          i++;
-      } else {
-        let pre = i + 1;
-        if(prices[pre]<=prices[pre+1]){
-            pre++;
-        } else {
-            output += prices[pre] - prices[i];
-            i = pre + 1;
-            console.log(output,'output');
-            console.log(i,'i');
-        }
-      }
+  let buy = prices[i];
+  let sell = 0;
+  let n = prices.length;
+  if (n == 1 || n == 0) {
+    return 0;
+  }
+  for (; i < n; i++) {
+    buy = prices[i];
+    if (prices[i + 1] <= buy) {
+      buy = prices[i + 1];
+    } else {
+      while (prices[i] <= prices[i + 1] && i < n - 1) i++;
+      sell = prices[i];
+      output += sell - buy;
+    }
   }
   return output;
 };
-
-console.log(maxProfit([7, 1, 5, 3, 6, 4]));
+let data = [1,2,3,4,5];
+console.log(maxProfit(data));
