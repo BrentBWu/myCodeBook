@@ -60,6 +60,5 @@
         slow = slow.next;
     }
     return fast;
-    
 };
 
