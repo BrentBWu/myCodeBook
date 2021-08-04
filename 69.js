@@ -20,3 +20,25 @@
 // Constraints:
 
 // 0 <= x <= 231 - 1
+/**
+ * @param {number} x
+ * @return {number}
+ */
+ var mySqrt = function(x) {
+    if(x==0) return x;
+    let left = 1, right = x, sqrt, mid;
+    while(left <= right) {
+        mid = left + (right - left) / 2; // l + r可能会溢出
+        sqrt = x / mid;
+        if(sqrt == mid) {
+            return mid;
+        } else if (sqrt > mid) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return right;
+};
+const a = 9;
+console.log(mySqrt(a));
