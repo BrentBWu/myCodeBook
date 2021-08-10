@@ -30,41 +30,29 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-  if (nums.length === 0) return [-1, -1];
-  let lower = lowerBand(nums, target);
-  let upper = upperBand(nums, target) - 1;
-  if (lower === nums.size() || nums[lower] != target) {
-    return [-1, -1];
-  }
-  return [lower, upper];
-  function lowerBand(nums, target) {
-    let l = 0,
-      r = nums.length - 1,
-      mid;
-    while (l <= r) {
-      mid = parseInt(l + (r - l) / 2);
-      if (nums[mid] >= target) {
-        r = mid;
-      } else {
-        l = mid + 1;
-      }
+    let firstNum, lastNum, lowNum = 0, highNum = nums.length - 1, mid;
+    while(lowNum <= highNum) {
+        mid = Math.floor(lowNum + (highNum - lowNum) / 2);
+        if(nums[mid] >= target) {
+            highNum = mid - 1;
+        } else {
+            lowNum = mid + 1;
+        }
     }
-    return l;
-  }
-  function upperBand(nums, target) {
-    let l = 0,
-      r = nums.length - 1,
-      mid;
-    while (l <= r) {
-      mid = parseInt(l + (r - l) / 2);
-      if (nums[mid] >= target) {
-        r = mid;
-      } else {
-        l = mid + 1;
-      }
+    console.log(nums[lowNum]);
+    if(nums[lowNum] !== target) return [-1, -1];
+    firstNum = lowNum;
+    lowNum = 0, highNum = nums.length -1;
+    while(lowNum <= highNum) {
+        mid = Math.floor(lowNum + (highNum - lowNum) / 2);
+        if(nums[mid] > target) {
+            highNum = mid - 1;
+        } else {
+            lowNum = mid + 1;
+        }
     }
-    return l;
-  }
+    lastNum = highNum;
+    return [firstNum, highNum];
 };
 let nums =  [5,7,7,8,8,10], target = 8;
 console.log(searchRange(nums,target));
