@@ -8,7 +8,7 @@ two pointers and recursion
 - set left and right pointers
 - iterate the array and judge whether s[l] == s[r]
     - if true, move r--, l--
-    - if false, check l+1 and r-1
+    - if false, check l+1 and r-1, create a function to iterate array to check palindrome
 */
 // @lc code=start
 /**
